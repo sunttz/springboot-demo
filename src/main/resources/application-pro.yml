@@ -1,0 +1,68 @@
+server:
+  port: 8080
+  session:
+    timeout: 10
+  tomcat:
+    uri-encoding: utf-8
+
+spring:
+#  profiles:
+#      active: pro
+  datasource:
+    url: jdbc:mysql://rm-2zem0219gsdbclrm8o.mysql.rds.aliyuncs.com:3306/sb-demo?useUnicode=true&characterEncoding=utf8
+    username: sbdemo
+    password: 123
+    driver-class-name: com.mysql.jdbc.Driver
+    # 使用druid数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+    filters: stat
+    maxActive: 20
+    initialSize: 5
+    maxWait: 60000
+    minIdle: 5
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxOpenPreparedStatements: 20
+  jpa:
+    database: mysql
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+      naming:
+        strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+  #设定ftl文件路径
+  freemarker:
+    template-loader-path: classpath:/templates
+  #设定静态文件路径，js,css等
+  mvc:
+    static-path-pattern: /static/**
+# REDIS (RedisProperties)
+  redis:
+    database: 0
+    host: 182.254.223.11
+    port: 6379
+    password: 123
+    pool:
+      max-active: 8
+      max-wait: -1
+      max-idle: 8
+      min-idle: 0
+    timeout: 0
+
+mybatis:
+  mapperLocations: classpath:mapper/*.xml
+  typeAliasesPackage: com.stt.entity
+
+logging:
+  level:
+    org:
+      hibernate: debug
+
